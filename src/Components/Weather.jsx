@@ -10,6 +10,13 @@ export default function Weather() {
       setError('Please Enter a city name');
       return;
     }
+    try{
+      const apiKey = 'c046612a0ea6bccddab3e81e2ebaf2a9';
+      const Res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+    }
+    catch{
+
+    }
     
   }
 
