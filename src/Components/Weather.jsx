@@ -1,11 +1,16 @@
 import axios from "axios";
-import { useState } from "react";
+import {  useState } from "react";
 import WeatherIcons from "./WeatherIcons";
+import styles from '../Components/Weather.module.css';
+
+
 
 export default function Weather() {
   const[city,setCity]= useState('');
   const[Error,setError]=useState('');
   const[Weather,setWeather]=useState([]);
+
+
   const getData = async ()=>{
     if(!city){
       setError('Please Enter a city name');
@@ -19,7 +24,7 @@ export default function Weather() {
 
     }
     catch(err){
-      setError['city not found !'];
+      setError('city not found !');
       setWeather[''];
     }
     
@@ -31,16 +36,21 @@ export default function Weather() {
       <input type="text" onChange={(e)=>setCity(e.target.value)}  value={city} />
       <button onClick={getData}>Get Data</button>
       {Error && <p   style={{ color: 'red' }}>{Error}</p>}
-      <ul>
+      <ul >
         {Weather.map((data)=>{
 
           return (
-          <li key={data.weather[0].id}>
+          <li key={data.weather[0].id} className={styles.details}>
               {/* <img src={<WeatherIcons weather={data.weather[0].main}/>}></img> */}
             <WeatherIcons prob={data.weather[0].main}/>
-            {data.name},
-            {data.weather[0].main},
-            {data.weather[0].description}
+            <div className={styles.container}><span className={styles.title}>Name of city :</span><span className={styles.sub}>{data.name}</span>
+            </div>
+            <div className={styles.container}><span className={styles.title}>Weather State :</span> <span className={styles.sub}>{data.weather[0].main}</span></div>
+            <div className={styles.container}><span className={styles.title}>Weather Condition :</span><span className={styles.sub}>{data.weather[0].description}</span></div>
+            <div className={styles.container}><span className={styles.title}>Temp :</span><span className={styles.sub}>{Math.floor(data.main.temp) +'°C'}</span></div>
+            
+           
+
           </li>
           );
         })}

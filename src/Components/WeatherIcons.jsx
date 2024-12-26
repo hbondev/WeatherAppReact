@@ -1,4 +1,4 @@
-
+import styles from '../Components/WeatherIcons.module.css';
 import windIcon from '../assets/iconsWeather/windy.png';
 import rainIcon from '../assets/iconsWeather/rainy-day.png';
 import mistIcon from '../assets/iconsWeather/mist.png';
@@ -16,6 +16,7 @@ export default function WeatherIcons({prob}){
       Rain :rainIcon,
       Mist :mistIcon,
       Fog :hailIcon,
+      Haze :hailIcon,
       climate:climateIcon,
       sun : sunIcon,
       snow : snowIcon,
@@ -25,10 +26,8 @@ export default function WeatherIcons({prob}){
 
    }
    
-   // const weatherCondition = prob; 
    const iconSrc = weather[prob]  ; 
       return<>
-
-      <img src={iconSrc} ></img>
+      <img src={iconSrc} className={styles.iconweather} ></img>
       </>
 }
